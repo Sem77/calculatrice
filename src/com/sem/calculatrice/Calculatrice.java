@@ -17,7 +17,7 @@ public class Calculatrice{
     }
 
     public void calculer(){
-
+		resultat = 0;
     	double resultatsSousExp[] = new double[100];
     	int tailleResultatsSousExp = 0;
 

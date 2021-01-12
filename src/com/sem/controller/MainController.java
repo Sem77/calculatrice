@@ -140,6 +140,7 @@ public class MainController implements Initializable{
 		calculatrice.setexpArt(expArtCopy);
 		calculatrice.calculer();
 		resultat = calculatrice.getResultat();
+		expArtCopy = String.valueOf(resultat);
 
 		expArtLabel.setText(String.valueOf(resultat));
 	}
