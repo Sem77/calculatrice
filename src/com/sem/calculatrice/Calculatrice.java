@@ -17,6 +17,9 @@ public class Calculatrice{
     }
 
     public void calculer(){
+
+		ajouterPlusDevantMoins();
+
 		resultat = 0;
     	double resultatsSousExp[] = new double[100];
     	int tailleResultatsSousExp = 0;
@@ -54,21 +57,23 @@ public class Calculatrice{
 		int tailleTabSignes = 0;
 		double result;
 		for(int i=0; i<expr.length(); i++){
-			if(expr.charAt(i) != '*' && expr.charAt(i) != '/'){
-				ch += expr.charAt(i);
-				if(i == expr.length()-1){
+			try{
+				if(expr.charAt(i) != '*' && expr.charAt(i) != '/'){
+					ch += expr.charAt(i);
+					if(i == expr.length()-1){
+						exp[tailleExp] = Double.parseDouble(ch);
+						ch = "";
+						tailleExp++;
+					}
+				}
+				else{
+					tabSignes[tailleTabSignes] = expr.charAt(i);
 					exp[tailleExp] = Double.parseDouble(ch);
 					ch = "";
 					tailleExp++;
+					tailleTabSignes++;
 				}
-			}
-			else{
-				tabSignes[tailleTabSignes] = expr.charAt(i);
-				exp[tailleExp] = Double.parseDouble(ch);
-				ch = "";
-				tailleExp++;
-				tailleTabSignes++;
-			}
+			}catch(NumberFormatException e){}
 		}
 		result = exp[0];
 		int j = 1;
@@ -80,6 +85,10 @@ public class Calculatrice{
 			j++;
 		}
 		return result;
+	}
+
+	private void ajouterPlusDevantMoins(){
+		expArt = expArt.replaceAll("-", "+-");
 	}
 
 	public double getResultat(){

@@ -20,6 +20,7 @@ EXCEPTIONS GEREES
 */
 
 import com.sem.calculatrice.*;
+import com.sem.exceptions.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -40,108 +41,107 @@ public class MainController implements Initializable{
 	@FXML
 	private Button bouton1, bouton2, bouton3, bouton4, bouton5, bouton6, bouton7, bouton8, bouton9, bouton0, boutonPoint, boutonEgal, boutonClear;
 	
-	private String expArtCopy = "";
 	private double resultat = 0;
 	private boolean opPressed = false;
+	private char carActuel;
 	private Calculatrice calculatrice = new Calculatrice("");
 
 	//Méthode qui affiche à l'écran chaque touche pressée
 	@FXML
-	protected void ecrire(ActionEvent e) {	
-		if(e.getSource() == bouton1){
-			expArtLabel.setText(expArtLabel.getText() + "1");
-			expArtCopy += "1";
-			opPressed = false;
-		}
-		else if(e.getSource() == bouton2){
-			expArtLabel.setText(expArtLabel.getText() + "2");
-			expArtCopy += "2";
-			opPressed = false;
-		}
-		else if(e.getSource() == bouton3){
-			expArtLabel.setText(expArtLabel.getText() + "3");
-			expArtCopy += "3";
-			opPressed = false;
-		}
-		else if(e.getSource() == bouton4){
-			expArtLabel.setText(expArtLabel.getText() + "4");
-			expArtCopy += "4";
-			opPressed = false;
-		}
-		else if(e.getSource() == bouton5){
-			expArtLabel.setText(expArtLabel.getText() + "5");
-			expArtCopy += "5";
-			opPressed = false;
-		}
-		else if(e.getSource() == bouton6){
-			expArtLabel.setText(expArtLabel.getText() + "6");
-			expArtCopy += "6";
-			opPressed = false;
-		}
-		else if(e.getSource() == bouton7){
-			expArtLabel.setText(expArtLabel.getText() + "7");
-			expArtCopy += "7";
-			opPressed = false;
-		}
-		else if(e.getSource() == bouton8){
-			expArtLabel.setText(expArtLabel.getText() + "8");
-			expArtCopy += "8";
-			opPressed = false;
-		}
-		else if(e.getSource() == bouton9){
-			expArtLabel.setText(expArtLabel.getText() + "9");
-			expArtCopy += "9";
-			opPressed = false;
-		}
-		else if(e.getSource() == bouton0){
-			expArtLabel.setText(expArtLabel.getText() + "0");
-			expArtCopy += "0";
-			opPressed = false;
-		}
-		else if(e.getSource() == boutonPoint){
-			expArtLabel.setText(expArtLabel.getText() + ".");
-			expArtCopy += ".";
-		}
-		else if(e.getSource() == boutonPlus){
-			if(opPressed == false){
-				expArtLabel.setText(expArtLabel.getText() + "+");
-				expArtCopy += "+";
-				opPressed = true;
+	protected void ecrire(ActionEvent e) throws ExceptionTropdOperateurs{
+		try{	
+			if(e.getSource() == bouton1){
+				opPressed = false; carActuel = '1';
+				expArtLabel.setText(expArtLabel.getText() + carActuel);
 			}
-		}
-		else if(e.getSource() == boutonMoins){
-			if(opPressed == false){
-				expArtLabel.setText(expArtLabel.getText() + "-");
-				expArtCopy += "+-";
-				opPressed = true;
+			else if(e.getSource() == bouton2){
+				opPressed = false; carActuel = '2';
+				expArtLabel.setText(expArtLabel.getText() + carActuel);
 			}
-		}
-		else if(e.getSource() == boutonFois){
-			if(opPressed == false){
-				expArtLabel.setText(expArtLabel.getText() + "*");
-				expArtCopy += "*";
-				opPressed = true;
+			else if(e.getSource() == bouton3){
+				opPressed = false; carActuel = '3';
+				expArtLabel.setText(expArtLabel.getText() + carActuel);
 			}
-		}
-		else if(e.getSource() == boutonDiv){
-			if(opPressed == false){
-				expArtLabel.setText(expArtLabel.getText() + "/");
-				expArtCopy += "/";
-				opPressed = true;
+			else if(e.getSource() == bouton4){
+				opPressed = false; carActuel = '4';
+				expArtLabel.setText(expArtLabel.getText() + carActuel);
 			}
+			else if(e.getSource() == bouton5){
+				opPressed = false; carActuel = '5';
+				expArtLabel.setText(expArtLabel.getText() + carActuel);
+			}
+			else if(e.getSource() == bouton6){
+				opPressed = false; carActuel = '6';
+				expArtLabel.setText(expArtLabel.getText() + carActuel);
+			}
+			else if(e.getSource() == bouton7){
+				opPressed = false; carActuel = '7';
+				expArtLabel.setText(expArtLabel.getText() + carActuel);
+			}
+			else if(e.getSource() == bouton8){
+				opPressed = false; carActuel = '8';
+				expArtLabel.setText(expArtLabel.getText() + carActuel);
+			}
+			else if(e.getSource() == bouton9){
+				opPressed = false; carActuel = '9';
+				expArtLabel.setText(expArtLabel.getText() + carActuel);
+			}
+			else if(e.getSource() == bouton0){
+				opPressed = false; carActuel = '0';
+				expArtLabel.setText(expArtLabel.getText() + carActuel);
+			}
+			else if(e.getSource() == boutonPoint){
+				carActuel = '.';
+				expArtLabel.setText(expArtLabel.getText() + carActuel);
+			}
+			else if(e.getSource() == boutonPlus){
+				carActuel = '+';
+				if(opPressed == false){
+					opPressed = true;
+					expArtLabel.setText(expArtLabel.getText() + carActuel);
+				}
+				else
+					throw new ExceptionTropdOperateurs();
+			}
+			else if(e.getSource() == boutonMoins){
+				carActuel = '-';
+				if(opPressed == false){
+					opPressed = true;
+					expArtLabel.setText(expArtLabel.getText() + carActuel);
+				}
+				else
+					throw new ExceptionTropdOperateurs();
+			}
+			else if(e.getSource() == boutonFois){
+				carActuel = '*';
+				if(opPressed == false){
+					opPressed = true;
+					expArtLabel.setText(expArtLabel.getText() + carActuel);
+				}
+				else
+					throw new ExceptionTropdOperateurs();
+			}
+			else if(e.getSource() == boutonDiv){
+				carActuel = '/';
+				if(opPressed == false){
+					opPressed = true;
+					expArtLabel.setText(expArtLabel.getText() + carActuel);
+				}
+				else
+					throw new ExceptionTropdOperateurs();
+			}
+		}catch(ExceptionTropdOperateurs ex){
+			expArtLabel.setText(expArtLabel.getText().substring(0, expArtLabel.getText().length()-1) + carActuel);
 		}
-		
 	}
 
 
 	//Méthode qui évalue l'expression arithmétique puis calcule le résultat après que la touche '=' ait été préssée
 	@FXML
 	protected void actionBtEgal(){
-		calculatrice.setexpArt(expArtCopy);
+		calculatrice.setexpArt(expArtLabel.getText());
 		calculatrice.calculer();
 		resultat = calculatrice.getResultat();
-		expArtCopy = String.valueOf(resultat);
-
 		expArtLabel.setText(String.valueOf(resultat));
 	}
 
@@ -149,7 +149,6 @@ public class MainController implements Initializable{
 	@FXML
 	private void reinitialiser(){
 		expArtLabel.setText("");
-		expArtCopy = "";
 		resultat = 0;
 		calculatrice.setResultat(0);
 		calculatrice.setexpArt("");
