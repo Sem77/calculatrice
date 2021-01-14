@@ -17,78 +17,48 @@ public class Calculatrice{
     }
 
     public void calculer(){
-
-		ajouterPlusDevantMoins();
-
-		resultat = 0;
-    	double resultatsSousExp[] = new double[100];
-    	int tailleResultatsSousExp = 0;
-
-	    StringTokenizer st = new StringTokenizer(expArt, "+");
-			
-		while(st.hasMoreTokens()){
-			resultatsSousExp[tailleResultatsSousExp] = calcSousExp(st.nextToken());
-			tailleResultatsSousExp++;
-		}
-			
-		for(int i=0; i<tailleResultatsSousExp; i++){
-			resultat += resultatsSousExp[i];
-		}
+		expArt = expArt.replaceAll("-", "+-"); //On ajoute + devant tous les -
+		resultat = calcSousExpPlus(expArt);
 	}
 
-    private double calcSousExp(String expr){
 
-		/*
-		FONCTIONNEMENT DE LA METHODE calcSousExp
-		On parcours caractère la String expr (sous-expression de l'expression arithmétique) caractère par caractère
-		si le caratère est différent de '*' ou '/' ou si il s'agit du dernier caractère, on le concatène à la String ch
-		si on tombe sur un opérateur alors on ajoute la chaîne ch au tableau exp en prennant soin de la convertir en double
-			on ajoute ensuite le signe trouvé au tableau tabSignes et on vide ensuite la chaîne ch
+	//Cette méthode calcule une expression arithmétique avec les opérateurs +, * et /
+	//On fait appel à la méthode calcSousExpProd qui fait appel à son tour à la méthode calcSousExpDiv
+	//Puis on fait la somme de chacun des résultats
+	private double calcSousExpPlus(String expr){
+		StringTokenizer stPlus = new StringTokenizer(expr, "+");
+		double resultatPlus = calcSousExpProd(stPlus.nextToken());
+
+		while(stPlus.hasMoreTokens()){
+			resultatPlus += calcSousExpProd(stPlus.nextToken());
+		}
+		return resultatPlus;
+	}
+
+
+	//Cette méthode calcule une expression arithmétique avec les opérateurs * et /
+	//On parse chacunes des sous-expressions séparées par l'opérateur * à la méthode calcSousExpDiv
+	//Puis on fait le produit de chacun des résultats
+	private double calcSousExpProd(String expr){
+		StringTokenizer stProd = new StringTokenizer(expr, "*");
+		double resultatProd = calcSousExpDiv(stProd.nextToken());
+
+		while(stProd.hasMoreTokens()){
+			resultatProd *= calcSousExpDiv(stProd.nextToken());
+		}
 		
-		Après avoir séparé les nombres d'un côté et les opérateurs d'un côté,
-		on parcours le tableau expr ainsi que le tableau tabSignes pour calculer la sous-expression
-		On retourne ensuite le résultat
-		*/
-
-		double exp[] = new double[100];
-		int tailleExp = 0;
-		String ch = "";
-		char tabSignes[] = new char[100];
-		int tailleTabSignes = 0;
-		double result;
-		for(int i=0; i<expr.length(); i++){
-			try{
-				if(expr.charAt(i) != '*' && expr.charAt(i) != '/'){
-					ch += expr.charAt(i);
-					if(i == expr.length()-1){
-						exp[tailleExp] = Double.parseDouble(ch);
-						ch = "";
-						tailleExp++;
-					}
-				}
-				else{
-					tabSignes[tailleTabSignes] = expr.charAt(i);
-					exp[tailleExp] = Double.parseDouble(ch);
-					ch = "";
-					tailleExp++;
-					tailleTabSignes++;
-				}
-			}catch(NumberFormatException e){}
-		}
-		result = exp[0];
-		int j = 1;
-		for(int i=0; i<tailleTabSignes; i++){
-			if(tabSignes[i] == '*')
-				result *= exp[j];
-			else if(tabSignes[i] == '/')
-				result /= exp[j];
-			j++;
-		}
-		return result;
+		return resultatProd;
 	}
 
-	private void ajouterPlusDevantMoins(){
-		expArt = expArt.replaceAll("-", "+-");
+
+	//Cette méthode calcule une expression arithmétique dont l'unique opérateur est /
+	private double calcSousExpDiv(String expr){
+		StringTokenizer stDiv = new StringTokenizer(expr, "/");
+		double resultatDiv = Double.parseDouble(stDiv.nextToken());
+		while(stDiv.hasMoreTokens()){
+			resultatDiv /= Double.parseDouble(stDiv.nextToken());
+		}
+		return resultatDiv;
 	}
 
 	public double getResultat(){
