@@ -44,7 +44,6 @@ public class MainController implements Initializable{
 	private double resultat = 0;
 	private boolean opPressed = false;
 	private char carActuel;
-	private Calculatrice calculatrice = new Calculatrice("");
 
 	//Méthode qui affiche à l'écran chaque touche pressée
 	@FXML
@@ -139,9 +138,7 @@ public class MainController implements Initializable{
 	//Méthode qui évalue l'expression arithmétique puis calcule le résultat après que la touche '=' ait été préssée
 	@FXML
 	protected void actionBtEgal(){
-		calculatrice.setexpArt(expArtLabel.getText());
-		calculatrice.calculer();
-		resultat = calculatrice.getResultat();
+		resultat = Calculatrice.calculer(expArtLabel.getText());
 		expArtLabel.setText(String.valueOf(resultat));
 	}
 
@@ -150,8 +147,6 @@ public class MainController implements Initializable{
 	private void reinitialiser(){
 		expArtLabel.setText("");
 		resultat = 0;
-		calculatrice.setResultat(0);
-		calculatrice.setexpArt("");
 	}
 	
 	@Override
