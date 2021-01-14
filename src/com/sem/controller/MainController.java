@@ -137,9 +137,14 @@ public class MainController implements Initializable{
 
 	//Méthode qui évalue l'expression arithmétique puis calcule le résultat après que la touche '=' ait été préssée
 	@FXML
-	protected void actionBtEgal(){
-		resultat = Calculatrice.calculer(expArtLabel.getText());
-		expArtLabel.setText(String.valueOf(resultat));
+	protected void actionBtEgal() throws ExceptionDivisionParZero{
+		try{
+			resultat = Calculatrice.calculer(expArtLabel.getText());
+			expArtLabel.setText(String.valueOf(resultat));
+		}catch(ExceptionDivisionParZero e){
+			expArtLabel.setText(e.getMessage());
+		}
+		
 	}
 
 	//Méthode qui réinitialise tout suite à l'appui sur le bouton clear
