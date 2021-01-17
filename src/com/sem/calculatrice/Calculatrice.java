@@ -7,7 +7,7 @@ import com.sem.exceptions.ExceptionDivisionParZero;
 public class Calculatrice{
 
 	public static double calculer(String expr) throws ExceptionDivisionParZero{
-		String expression = expr.replaceAll("-", "+-");
+		String expression = "0" + expr.replaceAll("-", "+-");
 		double resultat = calcSousExpPlus(expression);
 		return resultat;
 	}
