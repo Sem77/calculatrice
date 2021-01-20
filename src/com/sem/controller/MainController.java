@@ -148,7 +148,6 @@ public class MainController implements Initializable{
 		}catch(NumberFormatException e){
 			TextFieldExpression.setText("Erreur de syntaxe");
 		}
-		
 	}
 
 	//Méthode qui réinitialise tout suite à l'appui sur le bouton clear
