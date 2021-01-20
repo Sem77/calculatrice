@@ -13,7 +13,6 @@ Après qu'il ait appuyé sur la touche '=', la méthode calculBtEgal évalue l'e
 	Pour finir on affiche le résultat à l'écran
 */
 
-
 /*
 EXCEPTIONS GEREES
 	- Dans le cas où l'utilisateur saisi deux opérateurs à la suite, le deuxième ne s'affichera pas
@@ -29,13 +28,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 
 public class MainController implements Initializable{
 
 	@FXML
-	private Label expArtLabel;
+	private TextField TextFieldExpression;
 	@FXML
 	private Button boutonPlus, boutonMoins, boutonFois, boutonDiv;
 	@FXML
@@ -43,61 +42,63 @@ public class MainController implements Initializable{
 	
 	private double resultat = 0;
 	private boolean opPressed = false;
+	private boolean btEgalPressed= false;
 	private char carActuel;
 
 	//Méthode qui affiche à l'écran chaque touche pressée
 	@FXML
 	protected void ecrire(ActionEvent e) throws ExceptionTropdOperateurs{
+		if(btEgalPressed == true){TextFieldExpression.setText(""); btEgalPressed = false;}
 		try{	
 			if(e.getSource() == bouton1){
 				opPressed = false; carActuel = '1';
-				expArtLabel.setText(expArtLabel.getText() + carActuel);
+				TextFieldExpression.setText(TextFieldExpression.getText() + carActuel);
 			}
 			else if(e.getSource() == bouton2){
 				opPressed = false; carActuel = '2';
-				expArtLabel.setText(expArtLabel.getText() + carActuel);
+				TextFieldExpression.setText(TextFieldExpression.getText() + carActuel);
 			}
 			else if(e.getSource() == bouton3){
 				opPressed = false; carActuel = '3';
-				expArtLabel.setText(expArtLabel.getText() + carActuel);
+				TextFieldExpression.setText(TextFieldExpression.getText() + carActuel);
 			}
 			else if(e.getSource() == bouton4){
 				opPressed = false; carActuel = '4';
-				expArtLabel.setText(expArtLabel.getText() + carActuel);
+				TextFieldExpression.setText(TextFieldExpression.getText() + carActuel);
 			}
 			else if(e.getSource() == bouton5){
 				opPressed = false; carActuel = '5';
-				expArtLabel.setText(expArtLabel.getText() + carActuel);
+				TextFieldExpression.setText(TextFieldExpression.getText() + carActuel);
 			}
 			else if(e.getSource() == bouton6){
 				opPressed = false; carActuel = '6';
-				expArtLabel.setText(expArtLabel.getText() + carActuel);
+				TextFieldExpression.setText(TextFieldExpression.getText() + carActuel);
 			}
 			else if(e.getSource() == bouton7){
 				opPressed = false; carActuel = '7';
-				expArtLabel.setText(expArtLabel.getText() + carActuel);
+				TextFieldExpression.setText(TextFieldExpression.getText() + carActuel);
 			}
 			else if(e.getSource() == bouton8){
 				opPressed = false; carActuel = '8';
-				expArtLabel.setText(expArtLabel.getText() + carActuel);
+				TextFieldExpression.setText(TextFieldExpression.getText() + carActuel);
 			}
 			else if(e.getSource() == bouton9){
 				opPressed = false; carActuel = '9';
-				expArtLabel.setText(expArtLabel.getText() + carActuel);
+				TextFieldExpression.setText(TextFieldExpression.getText() + carActuel);
 			}
 			else if(e.getSource() == bouton0){
 				opPressed = false; carActuel = '0';
-				expArtLabel.setText(expArtLabel.getText() + carActuel);
+				TextFieldExpression.setText(TextFieldExpression.getText() + carActuel);
 			}
 			else if(e.getSource() == boutonPoint){
 				carActuel = '.';
-				expArtLabel.setText(expArtLabel.getText() + carActuel);
+				TextFieldExpression.setText(TextFieldExpression.getText() + carActuel);
 			}
 			else if(e.getSource() == boutonPlus){
 				carActuel = '+';
 				if(opPressed == false){
 					opPressed = true;
-					expArtLabel.setText(expArtLabel.getText() + carActuel);
+					TextFieldExpression.setText(TextFieldExpression.getText() + carActuel);
 				}
 				else
 					throw new ExceptionTropdOperateurs();
@@ -106,7 +107,7 @@ public class MainController implements Initializable{
 				carActuel = '-';
 				if(opPressed == false){
 					opPressed = true;
-					expArtLabel.setText(expArtLabel.getText() + carActuel);
+					TextFieldExpression.setText(TextFieldExpression.getText() + carActuel);
 				}
 				else
 					throw new ExceptionTropdOperateurs();
@@ -115,7 +116,7 @@ public class MainController implements Initializable{
 				carActuel = '*';
 				if(opPressed == false){
 					opPressed = true;
-					expArtLabel.setText(expArtLabel.getText() + carActuel);
+					TextFieldExpression.setText(TextFieldExpression.getText() + carActuel);
 				}
 				else
 					throw new ExceptionTropdOperateurs();
@@ -124,13 +125,13 @@ public class MainController implements Initializable{
 				carActuel = '/';
 				if(opPressed == false){
 					opPressed = true;
-					expArtLabel.setText(expArtLabel.getText() + carActuel);
+					TextFieldExpression.setText(TextFieldExpression.getText() + carActuel);
 				}
 				else
 					throw new ExceptionTropdOperateurs();
 			}
 		}catch(ExceptionTropdOperateurs ex){
-			expArtLabel.setText(expArtLabel.getText().substring(0, expArtLabel.getText().length()-1) + carActuel);
+			TextFieldExpression.setText(TextFieldExpression.getText().substring(0, TextFieldExpression.getText().length()-1) + carActuel);
 		}
 	}
 
@@ -138,11 +139,14 @@ public class MainController implements Initializable{
 	//Méthode qui évalue l'expression arithmétique puis calcule le résultat après que la touche '=' ait été préssée
 	@FXML
 	protected void actionBtEgal() throws ExceptionDivisionParZero{
+		btEgalPressed = true;
 		try{
-			resultat = Calculatrice.calculer(expArtLabel.getText());
-			expArtLabel.setText(String.valueOf(resultat));
+			resultat = Calculatrice.calculer(TextFieldExpression.getText());
+			TextFieldExpression.setText(String.valueOf(resultat));
 		}catch(ExceptionDivisionParZero e){
-			expArtLabel.setText(e.getMessage());
+			TextFieldExpression.setText(e.getMessage());
+		}catch(NumberFormatException e){
+			TextFieldExpression.setText("Erreur de syntaxe");
 		}
 		
 	}
@@ -150,12 +154,12 @@ public class MainController implements Initializable{
 	//Méthode qui réinitialise tout suite à l'appui sur le bouton clear
 	@FXML
 	private void reinitialiser(){
-		expArtLabel.setText("");
+		TextFieldExpression.setText("");
 		resultat = 0;
 	}
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		expArtLabel.setText("");
+		TextFieldExpression.setText("");
 	}
 }

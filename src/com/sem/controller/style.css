@@ -1,11 +1,12 @@
 .button{
-	-fx-font: 25px "Arial";
 	-fx-text-alignment: center;
 	-fx-background-color: radial-gradient(radius 100%, #a3cee6, #CADFFF);
-	-fx-width: 5px;
-	-fx-height: 5px;
+
 }
 
+.TextField{
+	-fx-background-color: #f09de5;
+}
 
 .button:hover{
 	-fx-background-color: radial-gradient(radius 100%, #628FC6, #A7C2D6);
@@ -15,24 +16,6 @@
 	-fx-background-color: #537236;
 }
 
-.label{
-	-fx-font: 28px "Arial";
-	-fx-height: 100em;
-}
-
-#prodButton{
-	-fx-width: 10px;
-}
-
-#clearHBox{
-	-fx-width: 10px;
-}
-
 #boitePrincipale{
-	-fx-background-color: #00645c;
-}
-
-#expArtLabel{
-	-fx-color: #4400ff;
-	-fx-border: 10px;
+	-fx-background-color: #011f1c;
 }
