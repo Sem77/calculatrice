@@ -44,6 +44,7 @@ public class MainController implements Initializable{
 	private boolean opPressed = false;
 	private boolean btEgalPressed= false;
 	private char carActuel;
+	private String expressionAParser = "";
 
 	//Méthode qui affiche à l'écran chaque touche pressée
 	@FXML
@@ -140,15 +141,21 @@ public class MainController implements Initializable{
 	@FXML
 	protected void actionBtEgal() throws ExceptionDivisionParZero{
 		btEgalPressed = true;
+
 		try{
-			resultat = Calculatrice.calculer(TextFieldExpression.getText());
+
+			if(resultat != 0)
+				expressionAParser = String.valueOf(resultat) + TextFieldExpression.getText();
+			else
+				expressionAParser = TextFieldExpression.getText();
+
+			resultat = Calculatrice.calculer(expressionAParser);
 			TextFieldExpression.setText(String.valueOf(resultat));
 		}catch(ExceptionDivisionParZero e){
 			TextFieldExpression.setText(e.getMessage());
 		}catch(NumberFormatException e){
 			TextFieldExpression.setText("Erreur de syntaxe");
 		}
-		
 	}
 
 	//Méthode qui réinitialise tout suite à l'appui sur le bouton clear
