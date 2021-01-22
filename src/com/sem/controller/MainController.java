@@ -150,7 +150,7 @@ public class MainController implements Initializable{
 				expressionAParser = TextFieldExpression.getText();
 
 			resultat = Calculatrice.calculer(expressionAParser);
-			TextFieldExpression.setText(String.valueOf(resultat));
+			//TextFieldExpression.setText(String.valueOf(resultat));
 		}catch(ExceptionDivisionParZero e){
 			TextFieldExpression.setText(e.getMessage());
 		}catch(NumberFormatException e){
