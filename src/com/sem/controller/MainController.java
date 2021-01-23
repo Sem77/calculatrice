@@ -1,22 +1,4 @@
 package com.sem.controller;
-/*
-FONCTIONNEMENT DU PROGRAMME COMPLET
-
-On laisse la possibilité à l'utilisateur de saisir les expressions arithmétiques
-Après qu'il ait appuyé sur la touche '=', la méthode calculBtEgal évalue l'expression
-	On utilise la classe StringTokenizer pour séparer l'expression en sous-expression selon le séparateur '+'
-	Lorsqu'il y a l'opérateur '-', il est traîté comme l'opérateur '+' avec le nombre qui suit considéré comme négatif (4 * 12 + 7 * 2 + (-9) / 2)
-	On aura donc dans chaque sous-expression les opérateurs '*' et/ou '/'
-	On parcours ensuite chacunes des sous-expressions et on fait appel à la méthode calcSousExp qui retourne le résultat de la sous*expression
-	les différents résultats sont enregistrés dans le tableau resultatsSousExp
-	On finit parcourir le tableau resultatsSousExp pour faire la somme de tous les sous résultats on l'enregistre dans la variable resultat
-	Pour finir on affiche le résultat à l'écran
-*/
-
-/*
-EXCEPTIONS GEREES
-	- Dans le cas où l'utilisateur saisi deux opérateurs à la suite, le deuxième ne s'affichera pas
-*/
 
 import com.sem.calculatrice.*;
 import com.sem.exceptions.*;
