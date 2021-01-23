@@ -28,7 +28,7 @@ public class MainController implements Initializable{
 	private char carActuel;
 	private String expressionAParser = "";
 
-	//Méthode qui affiche à l'écran chaque touche pressée
+	//Méthode qui gère les actions des tuches pressées
 	@FXML
 	protected void ecrire(ActionEvent e) throws ExceptionTropdOperateurs{
 		if(btEgalPressed == true){TextFieldExpression.setText(""); btEgalPressed = false;}
