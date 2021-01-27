@@ -8,7 +8,7 @@ public class App extends Application{
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("com/sem/controller/Ui2.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("com/sem/controller/Ui.fxml"));
 		
 		stage.setTitle("Calculatrice");
 		stage.setResizable(false); 

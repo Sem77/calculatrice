@@ -19,3 +19,7 @@
 #boitePrincipale{
 	-fx-background-color: #011f1c;
 }
+
+#boutonPlus, #boutonMoins, #boutonFois, #boutonDiv{
+	-fx-background-color: #2263b8;
+}
